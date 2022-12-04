@@ -3,41 +3,31 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
         <entry key="..\:/PAPB/PAPB/app/src/main/res/font-v26/index.xml" value="0.20572916666666666" />
         <entry key="..\:/PAPB/PAPB/app/src/main/res/font/index.xml" value="0.2046875" />
         <entry key="..\:/PAPB/PAPB/app/src/main/res/font/srcfont.xml" value="0.2046875" />
-=======
->>>>>>> 1f787bbfa83a76c5e43bf917bcb130c7789d2b64
->>>>>>> 674855fd15a8608bc29b4f4fa906750d52acb270
         <entry key="..\:/PAPB/PAPB/app/src/main/res/layout/home.xml" value="0.16666666666666666" />
         <entry key="..\:/PAPB/PAPB/app/src/main/res/layout/login_layout.xml" value="0.17552083333333332" />
         <entry key="..\:/PAPB/PAPB/app/src/main/res/layout/signup_layout.xml" value="0.17552083333333332" />
->>>>>>> 2a42d2595241cdab57c11b20e9957e23ccbfe35d
         <entry key="..\:/Users/Asus/AndroidStudioProjects/projectpapb/app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/Asus/AndroidStudioProjects/projectpapb/app/src/main/res/layout/home.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Asus/AndroidStudioProjects/projectpapb/app/src/main/res/layout/login_layout.xml" value="0.22" />
         <entry key="..\:/Users/Asus/AndroidStudioProjects/projectpapb/app/src/main/res/layout/signup_layout.xml" value="0.22" />
-<<<<<<< HEAD
-        <entry key="..\:/Users/WINDOWS 10/AndroidStudioProjects/PAPB/app/src/main/res/layout/addtugas.xml" value="0.2" />
-        <entry key="..\:/Users/WINDOWS 10/AndroidStudioProjects/PAPB/app/src/main/res/layout/home.xml" value="0.209375" />
-        <entry key="..\:/Users/WINDOWS 10/AndroidStudioProjects/PAPB/app/src/main/res/layout/login_layout.xml" value="0.22" />
-        <entry key="..\:/Users/WINDOWS 10/AndroidStudioProjects/PAPB/app/src/main/res/layout/signup_layout.xml" value="0.25" />
-=======
-        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/PAPB/app/src/main/res/layout/addtugas.xml" value="0.22" />
-        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/PAPB/app/src/main/res/layout/detailtugas.xml" value="0.22" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/PAPB/app/src/main/res/drawable/ic_kerja_in.xml" value="0.1665" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/PAPB/app/src/main/res/layout/addtugas.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/PAPB/app/src/main/res/layout/detailtugas.xml" value="0.1796875" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/PAPB/app/src/main/res/layout/home.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/PAPB/app/src/main/res/layout/login_layout.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/PAPB/app/src/main/res/layout/signup_layout.xml" value="0.17552083333333332" />
->>>>>>> 674855fd15a8608bc29b4f4fa906750d52acb270
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/PAPB/app/src/main/res/layout/splashscreen.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/PAPB/app/src/main/res/menu/menu.xml" value="0.1578125" />
+        <entry key="..\:/Users/WINDOWS 10/AndroidStudioProjects/PAPB/app/src/main/res/layout/addtugas.xml" value="0.2" />
+        <entry key="..\:/Users/WINDOWS 10/AndroidStudioProjects/PAPB/app/src/main/res/layout/home.xml" value="0.209375" />
+        <entry key="..\:/Users/WINDOWS 10/AndroidStudioProjects/PAPB/app/src/main/res/layout/login_layout.xml" value="0.5" />
+        <entry key="..\:/Users/WINDOWS 10/AndroidStudioProjects/PAPB/app/src/main/res/layout/signup_layout.xml" value="0.33" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

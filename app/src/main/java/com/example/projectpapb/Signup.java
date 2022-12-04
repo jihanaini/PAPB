@@ -1,10 +1,11 @@
 package com.example.projectpapb;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,14 +19,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Signup extends AppCompatActivity {
-    ImageButton registerBtn;
+    Button registerBtn;
     EditText email, username, password;
     FirebaseAuth firebaseAuth;
     TextView registerToLogin;
-
+    ProgressDialog progress;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.signup_layout);
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseApp.initializeApp(this);
@@ -47,10 +49,15 @@ public class Signup extends AppCompatActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progress=new ProgressDialog(Signup.this);
+                progress.setMessage("Memproses");
+                progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progress.show();
                 firebaseAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
+                            progress.hide();
                             Toast.makeText(Signup.this, "Registered successfully", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(Signup.this, Login.class);
                             startActivity(intent);

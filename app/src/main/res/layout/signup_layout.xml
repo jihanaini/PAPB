@@ -4,131 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Signup"><![CDATA[
-
-
-
-
-
-
-=======
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.437" />
-
-    >>>>>>> 1f787bbfa83a76c5e43bf917bcb130c7789d2b64
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    =======
-        app:layout_constraintVertical_bias="1.0" />
-
-
-
-
-
-
-
-
->>>>>>> 1f787bbfa83a76c5e43bf917bcb130c7789d2b64
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    =======
-        app:layout_constraintTop_toBottomOf="@+id/passwordRegister"
-        app:layout_constraintVertical_bias="0.014" />
->>>>>>> 1f787bbfa83a76c5e43bf917bcb130c7789d2b64
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    ]]>
-
+    tools:context=".Signup">
     <LinearLayout
         android:layout_width="346dp"
         android:layout_height="500dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="86dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="33dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerToLogin">
+        app:layout_constraintTop_toBottomOf="@+id/registerTitle">
 
         <TextView
             android:id="@+id/textView"
@@ -143,7 +30,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="80dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="1dp"
             app:cardBackgroundColor="#FFFFFF"
@@ -153,7 +40,7 @@
             app:contentPadding="0dp">
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:ems="10"
@@ -173,7 +60,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="80dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="1dp"
             app:cardBackgroundColor="#FFFFFF"
@@ -183,7 +70,7 @@
             app:contentPadding="0dp">
 
             <EditText
-                android:id="@+id/email"
+                android:id="@+id/emailRegister"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:ems="10"
@@ -205,7 +92,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="80dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="1dp"
             app:cardBackgroundColor="#FFFFFF"
@@ -215,7 +102,7 @@
             app:contentPadding="0dp">
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/passwordRegister"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:ems="10"
@@ -223,19 +110,27 @@
                 android:inputType="textPassword" />
         </androidx.cardview.widget.CardView>
 
-        <ImageButton
+        <Button
             android:id="@+id/registerBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="130dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="200dp"
             android:layout_marginTop="35dp"
-            android:background="@drawable/daftar"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            android:textSize="15dp"
+            android:text="Daftar" />
 
+        <TextView
+            android:id="@+id/registerToLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Beralih ke Login"
+            android:layout_gravity="center"
+            android:layout_marginTop="50sp"/>
     </LinearLayout>
 
     <TextView
-        android:id="@+id/registerToLogin"
+        android:id="@+id/registerTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_bold"
@@ -249,26 +144,3 @@
         app:layout_constraintVertical_bias="0.098" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <![CDATA[
-=======
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6" />
->>>>>>> 1f787bbfa83a76c5e43bf917bcb130c7789d2b64
-
-
-
-    ]]>
-
-    <![CDATA[=======
-        android:layout_marginBottom="16dp"
->>>>>>> 1f787bbfa83a76c5e43bf917bcb130c7789d2b64
-        android:text="Password"
-        app:layout_constraintBottom_toTopOf="@+id/passwordRegister"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.17"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    ]]>
