@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
@@ -63,22 +64,27 @@ public class Login extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progress=new ProgressDialog(Login.this);
-                progress.setMessage("Memproses");
-                progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                progress.show();
-                firebaseAuth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        progress.hide();
-                        if(task.isSuccessful()){
-                            Intent intent = new Intent(Login.this, MainActivity.class);
-                            startActivity(intent);
-                        }else{
-                            Toast.makeText(Login.this,task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                if(TextUtils.isEmpty(email.getText()) || TextUtils.isEmpty(password.getText())){
+                    Toast.makeText(Login.this, "Harap isi semua inputan!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    progress=new ProgressDialog(Login.this);
+                    progress.setMessage("Memproses");
+                    progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progress.show();
+                    firebaseAuth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            progress.hide();
+                            if(task.isSuccessful()){
+                                Intent intent = new Intent(Login.this, MainActivity.class);
+                                startActivity(intent);
+                            }else{
+                                Toast.makeText(Login.this,task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         });
 

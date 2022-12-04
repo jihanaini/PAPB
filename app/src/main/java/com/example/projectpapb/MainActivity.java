@@ -13,7 +13,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
-    TextView email;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
     @Override
