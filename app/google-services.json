@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "553106563990",
+    "project_id": "kerjain-9c254",
+    "storage_bucket": "kerjain-9c254.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553106563990:android:a1aed7e17bb0f93674b3b7",
+        "android_client_info": {
+          "package_name": "com.example.projectpapb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "553106563990-45hjlllulkl4gj9ovuodnj6so3ns08qk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTK4YAS61xQIJip0OXELL0wXHwKkKGRQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "553106563990-45hjlllulkl4gj9ovuodnj6so3ns08qk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
