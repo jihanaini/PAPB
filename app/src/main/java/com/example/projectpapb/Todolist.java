@@ -3,15 +3,15 @@ package com.example.projectpapb;
 public class Todolist {
     private String judul;
     private String deadline;
-    private boolean isDone;
+    private String status;
 
     public Todolist(){
     }
 
-    public Todolist(String judul, String deadline, boolean isDone){
+    public Todolist(String judul, String deadline, String status){
         this.judul = judul;
         this.deadline = deadline;
-        this.isDone = isDone;
+        this.status = status;
     }
 
     public String getJudul() {
@@ -30,11 +30,11 @@ public class Todolist {
         this.deadline = deadline;
     }
 
-    public boolean isDone() {
-        return isDone;
+    public String getStatus() {
+        return status;
     }
 
-    public void setDone(boolean done) {
-        isDone = done;
+    public void setDone(String status) {
+        this.status = status;
     }
 }

@@ -7,14 +7,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,7 +34,10 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
@@ -54,25 +61,73 @@ public class MainActivity extends AppCompatActivity {
         addTugas = findViewById(R.id.addSubyek);
         db = FirebaseFirestore.getInstance();
 
-        progress=new ProgressDialog(MainActivity.this);
-        progress.setMessage("Memproses");
-        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progress.show();
-
         subyekArrayList = new ArrayList<>();
-        rv1.setHasFixedSize(true);
         rv1.setLayoutManager(new LinearLayoutManager(this));
 
         subyekAdapter = new SubyekAdapter(subyekArrayList, this);
 
         rv1.setAdapter(subyekAdapter);
+
+        getSubyekList();
+
+        addTugas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Tambah Subyek");
+
+                final EditText input = new EditText(MainActivity.this);
+                input.setInputType(InputType.TYPE_CLASS_TEXT);
+                builder.setView(input);
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String subyekAdd = input.getText().toString();
+                        Map<String, String> newSubyek = new HashMap<>();
+                        newSubyek.put("subyek", subyekAdd);
+                        db.collection("user").document(firebaseUser.getEmail().toString()).collection("subyek").document(subyekAdd.toLowerCase(Locale.ROOT).replace(' ', '-'))
+                                .set(newSubyek)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        getSubyekList();
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                builder.show();
+
+            }
+        });
+    }
+
+    public void getSubyekList(){
+        progress = new ProgressDialog(MainActivity.this);
+        progress.setMessage("Memproses");
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progress.show();
+        subyekArrayList.clear();
         db.collection("user").document(firebaseUser.getEmail()).collection("subyek").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             progress.hide();
-                            for (QueryDocumentSnapshot document : task.getResult()){
+                            for (QueryDocumentSnapshot document : task.getResult()) {
                                 Subyek subyek = document.toObject(Subyek.class);
                                 subyekArrayList.add(subyek);
                                 subyekAdapter.notifyDataSetChanged();
@@ -90,15 +145,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-        addTugas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AddTugas.class);
-                startActivity(intent);
-            }
-        });
     }
-
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();

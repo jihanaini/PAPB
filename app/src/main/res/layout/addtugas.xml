@@ -7,33 +7,36 @@
     android:background="#ECF4FA">
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/addtodobtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/base"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.869"
+        app:layout_constraintHorizontal_bias="0.816"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.791"
         app:srcCompat="@drawable/group_6" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/deletebtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/base"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintHorizontal_bias="0.176"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.791"
         app:srcCompat="@drawable/hapus" />
 
     <ImageButton
-        android:id="@+id/imageButton5"
+        android:id="@+id/donebtn"
         android:layout_width="346dp"
         android:layout_height="59dp"
+        android:background="@color/base"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
@@ -46,6 +49,7 @@
         android:id="@+id/imageButton7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/base"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
@@ -58,6 +62,7 @@
         android:id="@+id/imageButton6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/base"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.477"
@@ -98,7 +103,7 @@
         app:layout_constraintVertical_bias="0.977" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/judulAdd"
         android:layout_width="251dp"
         android:layout_height="48dp"
         android:ems="10"
@@ -112,14 +117,16 @@
         app:layout_constraintVertical_bias="0.514" />
 
     <EditText
-        android:id="@+id/editTextDate2"
+        android:id="@+id/deadlineAdd"
         android:layout_width="253dp"
         android:layout_height="48dp"
         android:ems="10"
         android:inputType="datetime"
         app:layout_constraintBottom_toBottomOf="@+id/imageButton7"
         app:layout_constraintEnd_toEndOf="@+id/imageButton7"
+        app:layout_constraintHorizontal_bias="0.328"
         app:layout_constraintStart_toStartOf="@+id/imageButton7"
-        app:layout_constraintTop_toTopOf="@+id/imageButton7" />
+        app:layout_constraintTop_toTopOf="@+id/imageButton7"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

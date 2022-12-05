@@ -37,7 +37,7 @@ public class TodolistAdapter extends RecyclerView.Adapter<TodolistAdapter.ViewHo
         Todolist todolist = todolistArrayList.get(position);
         holder.judulTV.setText(todolist.getJudul());
         holder.deadlineTV.setText(todolist.getDeadline());
-        holder.isDoneTV.setText(todolist.isDone() ? "Done" : "Not Done");
+        holder.statusTV.setText(String.valueOf(todolist.getStatus()));
     }
 
     @Override
@@ -50,7 +50,7 @@ public class TodolistAdapter extends RecyclerView.Adapter<TodolistAdapter.ViewHo
         // creating variables for our text views.
         private final TextView judulTV;
         private final TextView deadlineTV;
-        private final TextView isDoneTV;
+        private final TextView statusTV;
         Context context;
 
         public ViewHolder(@NonNull View itemView) {
@@ -58,7 +58,7 @@ public class TodolistAdapter extends RecyclerView.Adapter<TodolistAdapter.ViewHo
             // initializing our text views.
             judulTV = itemView.findViewById(R.id.judul);
             deadlineTV = itemView.findViewById(R.id.deadline);
-            isDoneTV = itemView.findViewById(R.id.isdone);
+            statusTV = itemView.findViewById(R.id.isdone);
             context = itemView.getContext();
             itemView.setClickable(true);
             itemView.setOnClickListener(this);
@@ -66,10 +66,11 @@ public class TodolistAdapter extends RecyclerView.Adapter<TodolistAdapter.ViewHo
 
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(context, TodolistActivity.class);
+            Intent intent = new Intent(context, AddTugas.class);
             Bundle bundle = new Bundle();
             bundle.putString("judul", String.valueOf(judulTV.getText()));
             bundle.putString("deadline", String.valueOf(deadlineTV.getText()));
+            bundle.putString("status", String.valueOf(statusTV.getText()));
             intent.putExtras(bundle);
             context.startActivity(intent);
         }
