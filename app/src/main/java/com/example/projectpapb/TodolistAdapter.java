@@ -17,11 +17,13 @@ public class TodolistAdapter extends RecyclerView.Adapter<TodolistAdapter.ViewHo
     // creating variables for our ArrayList and context
     private ArrayList<Todolist> todolistArrayList;
     private Context context;
+    private String subyek;
 
     // creating constructor for our adapter class
-    public TodolistAdapter(ArrayList<Todolist> todolistArrayList, Context context) {
+    public TodolistAdapter(ArrayList<Todolist> todolistArrayList, Context context, String subyek) {
         this.todolistArrayList = todolistArrayList;
         this.context = context;
+        this.subyek = subyek;
     }
 
     @NonNull
@@ -68,6 +70,7 @@ public class TodolistAdapter extends RecyclerView.Adapter<TodolistAdapter.ViewHo
         public void onClick(View view) {
             Intent intent = new Intent(context, AddTugas.class);
             Bundle bundle = new Bundle();
+            bundle.putString("subyek", String.valueOf(subyek));
             bundle.putString("judul", String.valueOf(judulTV.getText()));
             bundle.putString("deadline", String.valueOf(deadlineTV.getText()));
             bundle.putString("status", String.valueOf(statusTV.getText()));

@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -44,6 +46,7 @@ public class TodolistActivity extends AppCompatActivity {
     ArrayList<Todolist> todoArrayList;
     TodolistAdapter todolistAdapter;
 
+    String subyek;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detailtugas);
@@ -54,7 +57,7 @@ public class TodolistActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        String subyek = bundle.getString("subyek");
+        subyek = bundle.getString("subyek");
         subyekTodolist = findViewById(R.id.subyekTodoList);
 
         subyekTodolist.setText(subyek);
@@ -65,19 +68,36 @@ public class TodolistActivity extends AppCompatActivity {
         addTodolist = findViewById(R.id.addTodolist);
         db = FirebaseFirestore.getInstance();
 
-        progress=new ProgressDialog(TodolistActivity.this);
-        progress.setMessage("Memproses");
-        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progress.show();
-
         todoArrayList = new ArrayList<>();
         rv2.setHasFixedSize(true);
         rv2.setLayoutManager(new LinearLayoutManager(this));
 
-        todolistAdapter = new TodolistAdapter(todoArrayList, this);
+        todolistAdapter = new TodolistAdapter(todoArrayList, this, subyek);
 
         rv2.setAdapter(todolistAdapter);
 
+        getTodoList();
+
+        addTodolist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(TodolistActivity.this, AddTugas.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("subyek", String.valueOf(""));
+                bundle.putString("judul", String.valueOf(""));
+                bundle.putString("deadline", String.valueOf(""));
+                bundle.putString("status", String.valueOf(""));
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void getTodoList(){
+        progress=new ProgressDialog(TodolistActivity.this);
+        progress.setMessage("Memproses");
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progress.show();
         db.collection("user").document(firebaseUser.getEmail()).collection("subyek").document(subyek.toString().toLowerCase(Locale.ROOT).replace(' ', '-')).collection("todolist").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -101,28 +121,28 @@ public class TodolistActivity extends AppCompatActivity {
                         Toast.makeText(TodolistActivity.this, "Fail to get the data.", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
 
-        addTodolist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(TodolistActivity.this, AddTugas.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("judul", String.valueOf(""));
-                bundle.putString("deadline", String.valueOf(""));
-                bundle.putString("status", String.valueOf(""));
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
-        });
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.subyek_menu, menu);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
+        if (item.getItemId()==android.R.id.home){
+            this.finish();
+            return true;
+        }
+        if (item.getItemId()==R.id.updatesubyek){
+            return true;
+        }
+        if (item.getItemId()==R.id.deletesubyek){
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

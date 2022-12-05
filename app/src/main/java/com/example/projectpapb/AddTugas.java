@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -24,15 +25,46 @@ public class AddTugas extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
+        String subyek = bundle.getString("subyek");
         String judul = bundle.getString("judul");
         String deadline = bundle.getString("deadline");
         String status = bundle.getString("status");
 
         juduls = findViewById(R.id.judulAdd);
         deadlines = findViewById(R.id.deadlineAdd);
+        addTodoBtn = findViewById(R.id.addtodobtn);
+        deleteBtn = findViewById(R.id.deletebtn);
+        doneBtn = findViewById(R.id.donebtn);
 
         juduls.setText(judul);
         deadlines.setText(deadline);
+
+        addTodoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               if(judul.isEmpty() || deadline.isEmpty() || status.isEmpty()){
+                   //ini insert
+               }else{
+                   //ini update
+               }
+            }
+        });
+
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        doneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+
     }
 
     @Override

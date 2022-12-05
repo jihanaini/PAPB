@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/updatesubyek"
+        android:title="Update Subyek"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/deletesubyek"
+        android:title="Delete Subyek"
+        app:showAsAction="never"/>
+</menu>
