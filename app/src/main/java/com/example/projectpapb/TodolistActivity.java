@@ -1,81 +1,87 @@
 package com.example.projectpapb;
 
-import static android.content.ContentValues.TAG;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
+import static android.content.ContentValues.TAG;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
+public class TodolistActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
     FirebaseFirestore db;
 
-    RecyclerView rv1;
-    FloatingActionButton addTugas;
+    TextView subyekTodolist;
+
+    RecyclerView rv2;
+    FloatingActionButton addTodolist;
     LinearLayoutManager linearLayoutManager;
     ProgressDialog progress;
-    ArrayList<Subyek> subyekArrayList;
-    SubyekAdapter subyekAdapter;
+    ArrayList<Todolist> todoArrayList;
+    TodolistAdapter todolistAdapter;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home);
+        setContentView(R.layout.detailtugas);
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        String subyek = bundle.getString("subyek");
+        subyekTodolist = findViewById(R.id.subyekTodoList);
+
+        subyekTodolist.setText(subyek);
+
         firebaseAuth =firebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
-        rv1 = findViewById(R.id.rv1);
-        addTugas = findViewById(R.id.addSubyek);
+        rv2 = findViewById(R.id.rv2);
+        addTodolist = findViewById(R.id.addTodolist);
         db = FirebaseFirestore.getInstance();
 
-        progress=new ProgressDialog(MainActivity.this);
+        progress=new ProgressDialog(TodolistActivity.this);
         progress.setMessage("Memproses");
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progress.show();
 
-        subyekArrayList = new ArrayList<>();
-        rv1.setHasFixedSize(true);
-        rv1.setLayoutManager(new LinearLayoutManager(this));
+        todoArrayList = new ArrayList<>();
+        rv2.setHasFixedSize(true);
+        rv2.setLayoutManager(new LinearLayoutManager(this));
 
-        subyekAdapter = new SubyekAdapter(subyekArrayList, this);
+        todolistAdapter = new TodolistAdapter(todoArrayList, this);
 
-        rv1.setAdapter(subyekAdapter);
-        db.collection("user").document(firebaseUser.getEmail()).collection("subyek").get()
+        rv2.setAdapter(todolistAdapter);
+
+        db.collection("user").document(firebaseUser.getEmail()).collection("subyek").document(subyek.toString().toLowerCase(Locale.ROOT).replace(' ', '-')).collection("todolist").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             progress.hide();
                             for (QueryDocumentSnapshot document : task.getResult()){
-                                Subyek subyek = document.toObject(Subyek.class);
-                                subyekArrayList.add(subyek);
-                                subyekAdapter.notifyDataSetChanged();
+                                Todolist todo = document.toObject(Todolist.class);
+                                todoArrayList.add(todo);
+                                todolistAdapter.notifyDataSetChanged();
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
@@ -86,33 +92,16 @@ public class MainActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         // if we do not get any data or any error we are displaying
                         // a toast message that we do not get any data
-                        Toast.makeText(MainActivity.this, "Fail to get the data.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TodolistActivity.this, "Fail to get the data.", Toast.LENGTH_SHORT).show();
                     }
                 });
 
-        addTugas.setOnClickListener(new View.OnClickListener() {
+        addTodolist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AddTugas.class);
+                Intent intent = new Intent(TodolistActivity.this, AddTugas.class);
                 startActivity(intent);
             }
         });
-    }
-
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
-
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId()==R.id.logout){
-            FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(MainActivity.this, Login.class);
-            startActivity(intent);
-        }
-        return true;
     }
 }

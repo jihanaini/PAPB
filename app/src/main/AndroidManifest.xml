@@ -18,6 +18,14 @@
             android:exported="true">
         </activity>
         <activity
+            android:name=".AddTugas"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".TodolistActivity"
+            android:exported="true">
+        </activity>
+        <activity
             android:name=".Signup"
             android:exported="true">
         </activity>
