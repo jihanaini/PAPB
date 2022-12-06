@@ -93,6 +93,7 @@ public class Signup extends AppCompatActivity {
                                             }
                                         });
                             }else{
+                                progress.hide();
                                 Toast.makeText(Signup.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                             }
                         }

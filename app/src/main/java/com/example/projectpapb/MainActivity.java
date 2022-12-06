@@ -135,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
                                 subyekAdapter.notifyDataSetChanged();
                             }
                         } else {
+                            progress.hide();
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
                     }
@@ -143,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         // if we do not get any data or any error we are displaying
                         // a toast message that we do not get any data
+                        progress.hide();
                         Toast.makeText(MainActivity.this, "Fail to get the data.", Toast.LENGTH_SHORT).show();
                     }
                 });
