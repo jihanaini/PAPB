@@ -1,13 +1,17 @@
 package com.example.projectpapb;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,16 +25,20 @@ import static android.content.ContentValues.TAG;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class TodolistActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
@@ -47,6 +55,7 @@ public class TodolistActivity extends AppCompatActivity {
     TodolistAdapter todolistAdapter;
 
     String subyek, idSubyek;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detailtugas);
@@ -100,7 +109,7 @@ public class TodolistActivity extends AppCompatActivity {
         progress.setMessage("Memproses");
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progress.show();
-        db.collection("user").document(firebaseUser.getEmail()).collection("subyek").document(subyek.toString().toLowerCase(Locale.ROOT).replace(' ', '-')).collection("todolist").get()
+        db.collection("user").document(firebaseUser.getEmail()).collection("subyek").document(idSubyek).collection("todolist").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -133,16 +142,32 @@ public class TodolistActivity extends AppCompatActivity {
         return true;
     }
 
+    public void deleteSubyek(){
+        db.collection("user").document(firebaseUser.getEmail().toString()).collection("subyek").document(idSubyek)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Intent intent1 = new Intent(TodolistActivity.this, MainActivity.class);
+                        startActivity(intent1);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(TodolistActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId()==android.R.id.home){
-            this.finish();
-            return true;
-        }
-        if (item.getItemId()==R.id.updatesubyek){
-            return true;
+            Intent i = new Intent(TodolistActivity.this, MainActivity.class);
+            startActivity(i);
         }
         if (item.getItemId()==R.id.deletesubyek){
+            deleteSubyek();
             return true;
         }
         return super.onOptionsItemSelected(item);

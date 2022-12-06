@@ -35,6 +35,7 @@ public class AddTugas extends AppCompatActivity {
     FirebaseUser firebaseUser;
     FirebaseFirestore db;
 
+    String idsubyek, subyek, idtodo;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addtugas);
@@ -49,9 +50,9 @@ public class AddTugas extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        String idsubyek = bundle.getString("idsubyek");
-        String subyek = bundle.getString("subyek");
-        String idtodo = bundle.getString("idtodo");
+        idsubyek = bundle.getString("idsubyek");
+        subyek = bundle.getString("subyek");
+        idtodo = bundle.getString("idtodo");
         String judul = bundle.getString("judul");
         String deadline = bundle.getString("deadline");
         String status = bundle.getString("status");
@@ -187,7 +188,12 @@ public class AddTugas extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                this.finish();
+                Intent intent1 = new Intent(AddTugas.this, TodolistActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("idsubyek", String.valueOf(idsubyek));
+                bundle.putString("subyek", String.valueOf(subyek));
+                intent1.putExtras(bundle);
+                startActivity(intent1);
                 return true;
         }
         return super.onOptionsItemSelected(item);
