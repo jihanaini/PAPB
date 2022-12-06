@@ -32,6 +32,21 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/idTodo"
+                android:layout_width="236dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Tugas Pertemuan 1"
+                android:textColor="#1E1E1E"
+                android:textSize="18sp"
+                android:visibility="gone"/>
+
+            <TextView
                 android:id="@+id/judul"
                 android:layout_width="236dp"
                 android:layout_height="40dp"

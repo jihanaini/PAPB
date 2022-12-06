@@ -1,6 +1,7 @@
 package com.example.projectpapb;
 
 public class Todolist {
+    private String idTodo;
     private String judul;
     private String deadline;
     private String status;
@@ -16,6 +17,14 @@ public class Todolist {
 
     public String getJudul() {
         return judul;
+    }
+
+    public String getIdTodo() {
+        return idTodo;
+    }
+
+    public void setIdTodo(String idTodo) {
+        this.idTodo = idTodo;
     }
 
     public void setJudul(String judul) {

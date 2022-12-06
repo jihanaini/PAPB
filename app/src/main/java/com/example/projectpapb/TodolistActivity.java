@@ -46,7 +46,7 @@ public class TodolistActivity extends AppCompatActivity {
     ArrayList<Todolist> todoArrayList;
     TodolistAdapter todolistAdapter;
 
-    String subyek;
+    String subyek, idSubyek;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detailtugas);
@@ -58,6 +58,7 @@ public class TodolistActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         subyek = bundle.getString("subyek");
+        idSubyek = bundle.getString("idsubyek");
         subyekTodolist = findViewById(R.id.subyekTodoList);
 
         subyekTodolist.setText(subyek);
@@ -72,7 +73,7 @@ public class TodolistActivity extends AppCompatActivity {
         rv2.setHasFixedSize(true);
         rv2.setLayoutManager(new LinearLayoutManager(this));
 
-        todolistAdapter = new TodolistAdapter(todoArrayList, this, subyek);
+        todolistAdapter = new TodolistAdapter(todoArrayList, this, idSubyek, subyek);
 
         rv2.setAdapter(todolistAdapter);
 
@@ -83,7 +84,8 @@ public class TodolistActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(TodolistActivity.this, AddTugas.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("subyek", String.valueOf(""));
+                bundle.putString("idsubyek", idSubyek);
+                bundle.putString("subyek", subyek);
                 bundle.putString("judul", String.valueOf(""));
                 bundle.putString("deadline", String.valueOf(""));
                 bundle.putString("status", String.valueOf(""));
@@ -106,6 +108,7 @@ public class TodolistActivity extends AppCompatActivity {
                             progress.hide();
                             for (QueryDocumentSnapshot document : task.getResult()){
                                 Todolist todo = document.toObject(Todolist.class);
+                                todo.setIdTodo(document.getId());
                                 todoArrayList.add(todo);
                                 todolistAdapter.notifyDataSetChanged();
                             }

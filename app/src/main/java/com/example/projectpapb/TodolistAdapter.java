@@ -17,12 +17,14 @@ public class TodolistAdapter extends RecyclerView.Adapter<TodolistAdapter.ViewHo
     // creating variables for our ArrayList and context
     private ArrayList<Todolist> todolistArrayList;
     private Context context;
+    private String idsubyek;
     private String subyek;
 
     // creating constructor for our adapter class
-    public TodolistAdapter(ArrayList<Todolist> todolistArrayList, Context context, String subyek) {
+    public TodolistAdapter(ArrayList<Todolist> todolistArrayList, Context context, String idsubyek, String subyek) {
         this.todolistArrayList = todolistArrayList;
         this.context = context;
+        this.idsubyek = idsubyek;
         this.subyek = subyek;
     }
 
@@ -37,6 +39,7 @@ public class TodolistAdapter extends RecyclerView.Adapter<TodolistAdapter.ViewHo
     public void onBindViewHolder(@NonNull TodolistAdapter.ViewHolder holder, int position) {
         // setting data to our text views from our modal class.
         Todolist todolist = todolistArrayList.get(position);
+        holder.idTodoTV.setText(todolist.getIdTodo());
         holder.judulTV.setText(todolist.getJudul());
         holder.deadlineTV.setText(todolist.getDeadline());
         holder.statusTV.setText(String.valueOf(todolist.getStatus()));
@@ -50,6 +53,7 @@ public class TodolistAdapter extends RecyclerView.Adapter<TodolistAdapter.ViewHo
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         // creating variables for our text views.
+        private final TextView idTodoTV;
         private final TextView judulTV;
         private final TextView deadlineTV;
         private final TextView statusTV;
@@ -58,6 +62,7 @@ public class TodolistAdapter extends RecyclerView.Adapter<TodolistAdapter.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             // initializing our text views.
+            idTodoTV = itemView.findViewById(R.id.idTodo);
             judulTV = itemView.findViewById(R.id.judul);
             deadlineTV = itemView.findViewById(R.id.deadline);
             statusTV = itemView.findViewById(R.id.isdone);
@@ -70,7 +75,9 @@ public class TodolistAdapter extends RecyclerView.Adapter<TodolistAdapter.ViewHo
         public void onClick(View view) {
             Intent intent = new Intent(context, AddTugas.class);
             Bundle bundle = new Bundle();
+            bundle.putString("idsubyek", String.valueOf(idsubyek));
             bundle.putString("subyek", String.valueOf(subyek));
+            bundle.putString("idtodo", String.valueOf(idTodoTV.getText()));
             bundle.putString("judul", String.valueOf(judulTV.getText()));
             bundle.putString("deadline", String.valueOf(deadlineTV.getText()));
             bundle.putString("status", String.valueOf(statusTV.getText()));

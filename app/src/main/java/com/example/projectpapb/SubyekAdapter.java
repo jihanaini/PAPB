@@ -36,6 +36,7 @@ public class SubyekAdapter extends RecyclerView.Adapter<SubyekAdapter.ViewHolder
         // setting data to our text views from our modal class.
         Subyek subyek = subyekArrayList.get(position);
         holder.subyekTV.setText(subyek.getSubyek());
+        holder.idSubyekTV.setText(subyek.getId());
     }
 
     @Override
@@ -47,12 +48,14 @@ public class SubyekAdapter extends RecyclerView.Adapter<SubyekAdapter.ViewHolder
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         // creating variables for our text views.
         private final TextView subyekTV;
+        private final TextView idSubyekTV;
         Context context;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             // initializing our text views.
             subyekTV = itemView.findViewById(R.id.subyek);
+            idSubyekTV = itemView.findViewById(R.id.idSubyek);
             context = itemView.getContext();
             itemView.setClickable(true);
             itemView.setOnClickListener(this);
@@ -63,6 +66,7 @@ public class SubyekAdapter extends RecyclerView.Adapter<SubyekAdapter.ViewHolder
             Intent intent = new Intent(context, TodolistActivity.class);
             Bundle bundle = new Bundle();
             bundle.putString("subyek", String.valueOf(subyekTV.getText()));
+            bundle.putString("idsubyek", String.valueOf(idSubyekTV.getText()));
             intent.putExtras(bundle);
             context.startActivity(intent);
         }

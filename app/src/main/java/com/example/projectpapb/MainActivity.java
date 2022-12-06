@@ -28,6 +28,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -85,11 +86,11 @@ public class MainActivity extends AppCompatActivity {
                         String subyekAdd = input.getText().toString();
                         Map<String, String> newSubyek = new HashMap<>();
                         newSubyek.put("subyek", subyekAdd);
-                        db.collection("user").document(firebaseUser.getEmail().toString()).collection("subyek").document(subyekAdd.toLowerCase(Locale.ROOT).replace(' ', '-'))
-                                .set(newSubyek)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        db.collection("user").document(firebaseUser.getEmail().toString()).collection("subyek")
+                                .add(newSubyek)
+                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                     @Override
-                                    public void onSuccess(Void aVoid) {
+                                    public void onSuccess(DocumentReference documentReference) {
                                         getSubyekList();
                                         dialog.dismiss();
                                     }
@@ -129,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
                             progress.hide();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Subyek subyek = document.toObject(Subyek.class);
+                                subyek.setId(document.getId());
                                 subyekArrayList.add(subyek);
                                 subyekAdapter.notifyDataSetChanged();
                             }
